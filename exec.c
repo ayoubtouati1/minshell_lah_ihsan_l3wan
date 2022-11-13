@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atouati <atouati@student.42.fr>            +#+  +:+       +#+        */
+/*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 01:50:54 by amimouni          #+#    #+#             */
-/*   Updated: 2022/11/12 19:33:52 by atouati          ###   ########.fr       */
+/*   Updated: 2022/11/13 18:52:58 by amimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser/minishell.h"
 #include "minishell2.h"
 #include "libft/libft.h"
 
@@ -33,6 +32,7 @@ int		is_builtin(char *command)
 
 char    **cmd_tab(t_minishell *start)
 {
+    
     t_minishell *token;
     char **tabs;
     int i;
@@ -60,12 +60,13 @@ char    **cmd_tab(t_minishell *start)
 		token = token->next;
 	}
 	tabs[i] = NULL;
-    i = 0;
-    while (tabs[i])
-    {
-        ft_putendl_fd(tabs[i++], 1);
-    }
-    
+    // while (tabs[i])
+    // {
+    //     ft_putstr_fd(tabs[i], 1);
+    //     ft_putchar_fd('\n', 1);
+    //     i++;
+    // }
+    ft_putstr_fd(ft_itoa(i), 1);
 	return (tabs);
 }
 
@@ -76,18 +77,18 @@ void    exec_cmd(t_shell *mini, t_minishell *token)
 
     if (mini->charge == 0)
         return ;
-    
     cmd = cmd_tab(token);
     i = 0;
+   
     if (cmd && ft_strcmp(cmd[0], "exit") == 0)
         run_exit(cmd, mini);
     else if (cmd && is_builtin(cmd[0]))
         mini->ret = run_builtins(cmd, mini);
-    else if (cmd)
+    else if (cmd[0])
         mini->ret = run_bin(cmd, mini->env, mini);
-    free_tab(cmd);
-    close(mini->pipout);
-    close(mini->pipin);
+    // free_tab(cmd);
+    ft_close(mini->pipout);
+    ft_close(mini->pipin);
     mini->pipin = -1;
     mini->pipout = -1;
     mini->charge = 0;

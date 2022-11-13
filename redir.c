@@ -3,20 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atouati <atouati@student.42.fr>            +#+  +:+       +#+        */
+/*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 18:58:29 by amimouni          #+#    #+#             */
-/*   Updated: 2022/11/12 19:34:05 by atouati          ###   ########.fr       */
+/*   Updated: 2022/11/13 18:26:29 by amimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser/minishell.h"
 #include "minishell2.h"
 #include "libft/libft.h"
 
 void    redir(t_shell *mini, t_minishell *token, int type)
 {
-    close(mini->fdout);
+    ft_close(mini->fdout);
     if (type == OUTPUT_FILE)
         mini->fdout = open(token->data, O_CREAT | O_WRONLY | O_TRUNC, S_IRWXU);
     else
@@ -25,7 +24,7 @@ void    redir(t_shell *mini, t_minishell *token, int type)
     {
         ft_putstr_fd("minishell: ",STDERR);
         ft_putstr_fd(token->data, STDERR);
-        ft_putstr_fd(": No such file or directory", STDERR);
+        ft_putstr_fd(": No such file or directory\n", STDERR);
         mini->ret = 1;
         mini->no_exec = 1;
         return ;
@@ -35,7 +34,7 @@ void    redir(t_shell *mini, t_minishell *token, int type)
 
 void    input(t_shell *mini, t_minishell *token)
 {
-    close(mini->fdin);
+    ft_close(mini->fdin);
     mini->fdin = open(token->data, O_RDONLY, S_IRWXU);
     if (mini->fdin == -1)
     {

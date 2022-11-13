@@ -1,4 +1,15 @@
-#include "parser/minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   signal.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/13 02:55:29 by amimouni          #+#    #+#             */
+/*   Updated: 2022/11/13 02:55:35 by amimouni         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell2.h"
 #include "libft/libft.h"
 
@@ -19,8 +30,8 @@ void sig_handler(int sig)
         nbr = ft_itoa(sig);
         if (sig_m.pid != 0)
         {
-            printf("Quit :");
-            printf("%s",nbr);
+            ft_putstr_fd("Quit :", 1);
+            ft_putstr_fd(nbr, 1);
             sig_m.exit_status = 131;
             sig_m.sigquit = 1;
         }

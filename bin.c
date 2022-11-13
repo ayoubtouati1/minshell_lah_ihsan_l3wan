@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   bin.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atouati <atouati@student.42.fr>            +#+  +:+       +#+        */
+/*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 04:30:44 by amimouni          #+#    #+#             */
-/*   Updated: 2022/11/13 00:13:28 by atouati          ###   ########.fr       */
+/*   Updated: 2022/11/13 02:54:06 by amimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser/minishell.h"
 #include "minishell2.h"
 #include "libft/libft.h"
 

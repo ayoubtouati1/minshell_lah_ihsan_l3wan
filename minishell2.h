@@ -6,7 +6,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <termios.h>
-#include <term.h>
 #include <curses.h>
 #include <signal.h>
 #include "parser/minishell.h"
@@ -94,4 +93,8 @@ void		input(t_shell *mini, t_minishell *token);
 int			is_in_env(t_list_env *env, char *args);
 int			env_add(const char *value, t_list_env *env);
 void 		execution(t_shell *ptr);
+void		reset_std(t_shell *mini);
+void		close_fds(t_shell *mini);
+void		reset_fds(t_shell *mini);
+void		ft_close(int fd);
 #endif  

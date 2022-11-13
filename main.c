@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atouati <atouati@student.42.fr>            +#+  +:+       +#+        */
+/*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 16:11:31 by atouati           #+#    #+#             */
-/*   Updated: 2022/11/13 01:31:21 by atouati          ###   ########.fr       */
+/*   Updated: 2022/11/13 19:11:02 by amimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"parser/minishell.h"
 #include "minishell2.h"
 #include "libft/libft.h"
 
@@ -197,10 +196,11 @@ int	main(int ac, char **av, char **env)
 	t_token     ptr;
     t_shell t_mini;
     t_mini.in = dup(STDIN);
-    t_mini.out = dup(STDOUT);
+	t_mini.out = dup(STDOUT);
     t_mini.ret = 0;
     t_mini.no_exec = 0;
     t_mini.exit = 0;
+	reset_fds(&t_mini);
     init_env(&t_mini,env);
     init_export_env(&t_mini ,env);
     (void)ac;
@@ -209,8 +209,8 @@ int	main(int ac, char **av, char **env)
 	{
 		ptr.if_true = 0;
 		init_sig();
-        signals();
-		ptr.parse_line = readline("\033[0;34mminihell-$ \033[0m");
+       	signals();
+		ptr.parse_line = readline("minihell-$ ");
 		if (!ptr.parse_line)
 			exit (0);
 		if (!ft_memcmp(ptr.parse_line, "\n"))
@@ -222,7 +222,7 @@ int	main(int ac, char **av, char **env)
 		t_mini.start = parser(&ptr, env);
 		if (ptr.if_true == 1)
 			continue ;
-		execution(&t_mini);12
+		execution(&t_mini);
 	}
 	//free (ptr);
 }

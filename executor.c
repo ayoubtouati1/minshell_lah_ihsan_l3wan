@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atouati <atouati@student.42.fr>            +#+  +:+       +#+        */
+/*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 22:18:12 by amimouni          #+#    #+#             */
-/*   Updated: 2022/11/13 00:12:18 by atouati          ###   ########.fr       */
+/*   Updated: 2022/11/13 19:17:06 by amimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser/minishell.h"
 #include "minishell2.h"
 #include "libft/libft.h"
 
@@ -43,18 +42,24 @@ static int is_types(t_minishell *token, char *types)
 void    redir_and_exec(t_shell *mini, t_minishell *token)
 {
     t_minishell *prev;
-    t_minishell *next;
+    t_minishell *head;
     int pipe;
-    int i;
+
+    pipe = 0;
    // prev = prev_sep(token, 0);
-   // next = next_sep(token, 0);
-    
-    if (is_type(token, OUTPUT_FILE))
-        redir(mini, token, OUTPUT_FILE);
-    else if(is_type(token, APPEND))
-        redir(mini, token, APPEND);
-    else if(is_type(token, INPUT_FILE))
-        input(mini, token);
+    // next = next_sep(token, 0);
+    head = token;
+    while (token)
+    {
+        if (is_type(token, OUTPUT_FILE))
+            redir(mini, token, OUTPUT_FILE);
+        else if(is_type(token, APPEND))
+            redir(mini, token, APPEND);
+        else if(is_type(token, INPUT_FILE))
+            input(mini, token);
+        token = token->next;
+    }
+    token = head;
     // else if (mini->start[i])
     //     pipe = minipipe(mini);
         // else if (is_type(token, HEREDOC))
@@ -71,20 +76,22 @@ void execution(t_shell *ptr)
     token = ptr->start;
     // if (is_types(ptr->start, "TAI"))
     //     token = ptr->start->next;
-    while (token[i])
+    while (token[i] && ptr->exit == 0)
     {
-         ptr->charge = 1;
-         ptr->parent = 1;
-         ptr->last = 1;
-         redir_and_exec(ptr, token[i]);
-         waitpid(-1, &status, 0);
-         status = WEXITSTATUS(status);
-         if (ptr->last == 0)
-             ptr->ret = status;
-         if (ptr->parent == 0)
-            exit(ptr->ret);
-         ptr->no_exec = 0;    
-         token[i] = (token[i]->next);
+        ptr->charge = 1;
+        ptr->parent = 1;
+        ptr->last = 1;
+        redir_and_exec(ptr, token[i]);
+        reset_std(ptr);
+		close_fds(ptr);
+		reset_fds(ptr);
+        waitpid(-1, &status, 0);
+        status = WEXITSTATUS(status);
+        if (ptr->last == 0)
+           ptr->ret = status;
+        if (ptr->parent == 0)
+           exit(ptr->ret);
+        ptr->no_exec = 0;
         i++;
     }
 }

@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: atouati <atouati@student.42.fr>            +#+  +:+       +#+         #
+#    By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/13 19:13:44 by atouati           #+#    #+#              #
-#    Updated: 2022/11/12 19:32:25 by atouati          ###   ########.fr        #
+#    Updated: 2022/11/13 02:57:55 by amimouni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS	= main.c parser/handling_quotes.c \
-			ft_strjoin.c ft_isdigit.c parser/expand.c parser/expand_2.c parser/util.c parser/util_2.c parser/handling_spaces.c parser/quotes.c parser/fill_stack.c \
-			parser/dollar_func.c utils.c signal.c executor.c exec.c bin.c redir.c sepr.c run_builtins.c
+			libft/ft_strjoin.c libft/ft_isdigit.c parser/expand.c parser/expand_2.c parser/util.c parser/util_2.c parser/handling_spaces.c parser/quotes.c parser/fill_stack.c \
+			parser/dollar_func.c utils.c signal.c executor.c exec.c bin.c redir.c sepr.c run_builtins.c fd.c
 SRCS2 = libft/ft_memmove.c libft/ft_isalpha.c libft/ft_isalnum.c libft/ft_isascii.c libft/ft_strdup.c \
 	libft/ft_isprint.c libft/ft_strcpy.c libft/ft_strlen.c libft/ft_memset.c libft/ft_bzero.c libft/ft_memcpy.c libft/ft_memcmp.c libft/ft_toupper.c \
 	libft/ft_tolower.c libft/ft_strlcpy.c libft/ft_strlcat.c libft/ft_strchr.c libft/ft_strrchr.c libft/ft_atoi.c libft/ft_strcat.c libft/ft_split.c \
@@ -20,6 +20,7 @@ SRCS2 = libft/ft_memmove.c libft/ft_isalpha.c libft/ft_isalnum.c libft/ft_isasci
 	libft/ft_strtrim.c libft/ft_itoa.c libft/ft_strmapi.c libft/ft_striteri.c \
 	libft/ft_putchar_fd.c libft/ft_strcmp.c libft/ft_putstr_fd.c libft/ft_putendl_fd.c libft/ft_putnbr_fd.c \
 	libft/ft_memdel.c
+	
 	
 BUILTINS = builtins/cd.c builtins/echo.c builtins/env.c builtins/exit.c builtins/export.c builtins/pwd.c \
 		   builtins/unset.c env_func/ft_list_sort_env.c

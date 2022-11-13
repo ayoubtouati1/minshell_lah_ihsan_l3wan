@@ -6,7 +6,7 @@
 /*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 05:51:08 by amimouni          #+#    #+#             */
-/*   Updated: 2022/11/11 21:15:39 by amimouni         ###   ########.fr       */
+/*   Updated: 2022/11/12 20:05:53 by amimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,9 @@
 #include "../libft/libft.h"
 int    ft_pwd(void)
 {
-    t_shell *g_mini;
-    char *pwd;
+    char pwd[PATH_MAX];
     
-    if(pwd == getenv("PWD"))
+    if(pwd == getcwd(pwd, PATH_MAX))
     {
         ft_putendl_fd(pwd, STDOUT);
         return(0);

@@ -1,33 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sepr.c                                             :+:      :+:    :+:   */
+/*   fd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 02:49:36 by amimouni          #+#    #+#             */
-/*   Updated: 2022/11/13 02:55:23 by amimouni         ###   ########.fr       */
+/*   Created: 2022/11/12 23:36:29 by amimouni          #+#    #+#             */
+/*   Updated: 2022/11/13 19:10:35 by amimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "minishell2.h"
 
-t_minishell *next_sep(t_minishell *token, int skip)
+void	ft_close(int fd)
 {
-    if (token && skip)
-        token = token->next;
-    while (token && token->type < INPUT_FILE)
-       token = token->next;
-    return (token);
+	if (fd > 0)
+		close(fd);
 }
 
-t_minishell *prev_sep(t_minishell *token, int skip)
+void	reset_std(t_shell *mini)
 {
-    if (token && skip)
-        token = token->next;
-    while (token && token->type < INPUT_FILE)
-        token = token->next;
-    return (token);
+	dup2(mini->in, STDIN);
+	dup2(mini->out, STDOUT);
 }
 
+void	close_fds(t_shell *mini)
+{
+	ft_close(mini->fdin);
+	ft_close(mini->fdout);
+	ft_close(mini->pipin);
+	ft_close(mini->pipout);
+}
+
+void	reset_fds(t_shell *mini)
+{
+	mini->fdin = -1;
+	mini->fdout = -1;
+	mini->pipin = -1;
+	mini->pipout = -1;
+	mini->pid = -1;
+}
