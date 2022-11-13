@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atouati <atouati@student.42.fr>            +#+  +:+       +#+        */
+/*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 01:40:30 by atouati           #+#    #+#             */
-/*   Updated: 2022/11/11 14:14:47 by atouati          ###   ########.fr       */
+/*   Updated: 2022/11/13 21:22:49 by amimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*copy_no_dollar(char *str, char *tmp, t_token *ptr)
 		ptr->n++;
 	}
 	dest[ptr->j] = '\0';
-	tmp = ft_strjoin(tmp, dest);
+	tmp = ft_strrjoin(tmp, dest);
 	return (tmp);
 }
 
@@ -81,7 +81,7 @@ char	*copy_no_expand(char *str, char *tmp, t_token *ptr)
 			ptr->n++;
 		}
 		dest[ptr->j] = '\0';
-		tmp = ft_strjoin(tmp, dest);
+		tmp = ft_strrjoin(tmp, dest);
 	}
 	return (tmp);
 }
@@ -92,9 +92,9 @@ char	*digit_expand(char *str, char *tmp, t_token *ptr, char **env)
 	if (str[ptr->i] == '$' && ft_isdigit(str[ptr->i + 1]) == 1)
 	{
 		ptr->i++;
-		tmp = ft_strjoin(tmp, expand(str, ptr->i, env));
+		tmp = ft_strrjoin(tmp, expand(str, ptr->i, env));
 		ptr->i = cont_dollar(str, ptr->n + 1);
-		tmp = ft_strjoin(tmp, ft_substr(str, ptr->n + 2, ptr->i - ptr->n - 2));
+		tmp = ft_strrjoin(tmp, ft_substr(str, ptr->n + 2, ptr->i - ptr->n - 2));
 	}
 	return (tmp);
 }

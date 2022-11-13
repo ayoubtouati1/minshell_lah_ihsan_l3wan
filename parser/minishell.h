@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atouati <atouati@student.42.fr>            +#+  +:+       +#+        */
+/*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 16:30:51 by atouati           #+#    #+#             */
-/*   Updated: 2022/11/12 19:36:07 by atouati          ###   ########.fr       */
+/*   Updated: 2022/11/13 21:21:52 by amimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ char		**replace_in_quotes(char **str, char a, char b);
 void		define_cmd(t_minishell **tokens);
 t_minishell	**sep_split(char **str, char sep, char **env);
 char		*get_next_line(int fd);
+char		*ft_strrjoin(char const *s1, char const *s2);
 
 ////////////for the parsing//////////////
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   util.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atouati <atouati@student.42.fr>            +#+  +:+       +#+        */
+/*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 02:55:18 by atouati           #+#    #+#             */
-/*   Updated: 2022/11/11 18:00:49 by atouati          ###   ########.fr       */
+/*   Updated: 2022/11/13 20:33:14 by amimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,7 @@ char	*count_space_and_alloc(char *str, char *dest, int i)
 			if ((str[i] == '<' || str[i] == '>'
 					|| str[i] == '|')
 				&& (str[i + 1] == '\0'))
-			{
-				printf("----------\n");
 				j++;
-			}
 			else if ((str[i] == '<' && str[i + 1] != '<')
 				|| (str[i] == '>' && str[i + 1] != '>')
 				|| str[i] == '|')
@@ -51,7 +48,6 @@ char	*count_space_and_alloc(char *str, char *dest, int i)
 		}
 		i++;
 	}
-	printf("----- %d -----\n", j);
 	dest = malloc(sizeof(char) * (len + j));
 	if (!dest)
 		return (NULL);

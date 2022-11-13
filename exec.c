@@ -6,7 +6,7 @@
 /*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 01:50:54 by amimouni          #+#    #+#             */
-/*   Updated: 2022/11/13 18:52:58 by amimouni         ###   ########.fr       */
+/*   Updated: 2022/11/13 20:44:21 by amimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,7 @@ char    **cmd_tab(t_minishell *start)
     //     ft_putstr_fd(tabs[i], 1);
     //     ft_putchar_fd('\n', 1);
     //     i++;
-    // }
-    ft_putstr_fd(ft_itoa(i), 1);
+    // 
 	return (tabs);
 }
 

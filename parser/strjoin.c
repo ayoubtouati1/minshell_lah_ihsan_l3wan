@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   strjoin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atouati <atouati@student.42.fr>            +#+  +:+       +#+        */
+/*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 22:01:38 by atouati           #+#    #+#             */
-/*   Updated: 2022/11/11 14:14:17 by atouati          ###   ########.fr       */
+/*   Updated: 2022/11/13 21:21:32 by amimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static char	*ft_sstrcpy(char *str, char *s1, char *s2)
 	return (str);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strrjoin(char const *s1, char const *s2)
 {
 	char	*str;
 	size_t	len_s1;

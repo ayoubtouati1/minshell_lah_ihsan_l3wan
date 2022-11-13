@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atouati <atouati@student.42.fr>            +#+  +:+       +#+        */
+/*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 02:27:46 by atouati           #+#    #+#             */
-/*   Updated: 2022/11/11 14:15:07 by atouati          ###   ########.fr       */
+/*   Updated: 2022/11/13 21:22:06 by amimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char *dollar_expand(char *str, char *tmp, t_token *ptr, char **env)
 			if (str[ptr->i] == '$' && str[ptr->i + 1] != ' ' && str[ptr->i + 1] != '\0' && str[ptr->i + 1] != '\'' && str[ptr->i + 1] != '"')
 			{
 				ptr->i++;
-				tmp = ft_strjoin(tmp, expand(str, ptr->i, env));
+				tmp = ft_strrjoin(tmp, expand(str, ptr->i, env));
 			}
 			while (str[ptr->i] && (str[ptr->i] != '"' && str[ptr->i] != '\'' && str[ptr->i] != '$' && str[ptr->i] != '.' && str[ptr->i] != ' '))
 				ptr->i++;

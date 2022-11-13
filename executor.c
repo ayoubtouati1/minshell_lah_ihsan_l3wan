@@ -6,7 +6,7 @@
 /*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 22:18:12 by amimouni          #+#    #+#             */
-/*   Updated: 2022/11/13 19:17:06 by amimouni         ###   ########.fr       */
+/*   Updated: 2022/11/13 20:42:20 by amimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,10 @@ static int is_types(t_minishell *token, char *types)
     return (0);    
 }
 
-void    redir_and_exec(t_shell *mini, t_minishell *token)
+void    redir_and_exec(t_shell *mini, t_minishell *token, int pipe)
 {
     t_minishell *prev;
     t_minishell *head;
-    int pipe;
-
-    pipe = 0;
    // prev = prev_sep(token, 0);
     // next = next_sep(token, 0);
     head = token;
@@ -64,7 +61,7 @@ void    redir_and_exec(t_shell *mini, t_minishell *token)
     //     pipe = minipipe(mini);
         // else if (is_type(token, HEREDOC))
         //     herdoc_func(mini, HEREDOC);
-    if (mini->no_exec == 0)
+    if (mini->no_exec == 0 && pipe != 1)
         exec_cmd(mini, token);
 }
 
@@ -72,7 +69,12 @@ void execution(t_shell *ptr)
 {
     t_minishell **token;
     int status;
-    int i = 0;
+    int i;
+
+    i = 0;
+
+    int pipe;
+    pipe = 0;
     token = ptr->start;
     // if (is_types(ptr->start, "TAI"))
     //     token = ptr->start->next;
@@ -81,7 +83,12 @@ void execution(t_shell *ptr)
         ptr->charge = 1;
         ptr->parent = 1;
         ptr->last = 1;
-        redir_and_exec(ptr, token[i]);
+        if (token[i + 1])
+        {
+            pipe = minipipe(ptr);
+            redir_and_exec(ptr, token[i + 1], pipe);
+        }
+        redir_and_exec(ptr, token[i], pipe);
         reset_std(ptr);
 		close_fds(ptr);
 		reset_fds(ptr);

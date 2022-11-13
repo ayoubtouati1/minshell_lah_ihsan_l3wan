@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_stack.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atouati <atouati@student.42.fr>            +#+  +:+       +#+        */
+/*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 03:46:24 by atouati           #+#    #+#             */
-/*   Updated: 2022/11/13 01:31:03 by atouati          ###   ########.fr       */
+/*   Updated: 2022/11/13 20:31:56 by amimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ t_minishell	*fill_stack(t_minishell *stack_a, char **str, char **env)
 	tmp = NULL;
 	if (!check_error(str))
 	{
-		printf("..........minishell: syntax error near unexpected token\n");
+		printf("minishell: syntax error near unexpected token\n");
 		return (NULL);
 	}
 	while (str[i])

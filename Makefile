@@ -6,13 +6,13 @@
 #    By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/13 19:13:44 by atouati           #+#    #+#              #
-#    Updated: 2022/11/13 02:57:55 by amimouni         ###   ########.fr        #
+#    Updated: 2022/11/13 21:25:10 by amimouni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS	= main.c parser/handling_quotes.c \
 			libft/ft_strjoin.c libft/ft_isdigit.c parser/expand.c parser/expand_2.c parser/util.c parser/util_2.c parser/handling_spaces.c parser/quotes.c parser/fill_stack.c \
-			parser/dollar_func.c utils.c signal.c executor.c exec.c bin.c redir.c sepr.c run_builtins.c fd.c
+			parser/dollar_func.c utils.c signal.c executor.c exec.c bin.c redir.c sepr.c run_builtins.c fd.c parser/strjoin.c
 SRCS2 = libft/ft_memmove.c libft/ft_isalpha.c libft/ft_isalnum.c libft/ft_isascii.c libft/ft_strdup.c \
 	libft/ft_isprint.c libft/ft_strcpy.c libft/ft_strlen.c libft/ft_memset.c libft/ft_bzero.c libft/ft_memcpy.c libft/ft_memcmp.c libft/ft_toupper.c \
 	libft/ft_tolower.c libft/ft_strlcpy.c libft/ft_strlcat.c libft/ft_strchr.c libft/ft_strrchr.c libft/ft_atoi.c libft/ft_strcat.c libft/ft_split.c \
