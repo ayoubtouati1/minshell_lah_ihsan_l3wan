@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: atouati <atouati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 16:11:31 by atouati           #+#    #+#             */
-/*   Updated: 2022/11/13 20:29:23 by amimouni         ###   ########.fr       */
+/*   Updated: 2022/11/13 21:57:02 by atouati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,37 +87,37 @@ t_minishell	**fill_token(t_token *ptr, char **env)
 		tokens[i] = head;
 		i++;
 	}
-	// i = 0;
-	// while (tokens[i])
-	// {
-	// 	head = tokens[i];
-	// 	while (tokens[i])
-	// 	{
-	// 		if (tokens[i]->type == INPUT_FILE)
-	// 			printf("[INPUT_FILE] %s [%d] [fd == %d]\n", tokens[i]->data, tokens[i]->quotes, tokens[i]->file.fd);
-	// 		else if (tokens[i]->type == OUTPUT_FILE)
-	// 			printf("[OUTPUT_FILE] %s [%d] [fd == %d]\n", tokens[i]->data, tokens[i]->quotes, tokens[i]->file.fd);
-	// 		else if (tokens[i]->type == HEREDOC)
-	// 			printf("[HERDOC] %s [%d] [fd == %d]\n", tokens[i]->data, tokens[i]->quotes, tokens[i]->file.fd);
-	// 		else if (tokens[i]->type == CMD)
-	// 			printf("[CMD] %s [%d] [fd == %d]\n", tokens[i]->data, tokens[i]->quotes, tokens[i]->file.fd);
-	// 		else if (tokens[i]->type == APPEND)
-	// 			printf("[APPEND] %s [%d] [fd == %d]\n", tokens[i]->data, tokens[i]->quotes, tokens[i]->file.fd);
-	// 		else if (tokens[i]->type == INPUT_OP)
-	// 			printf("[INPUT_OP] %s [%d] [fd == %d]\n", tokens[i]->data, tokens[i]->quotes, tokens[i]->file.fd);
-	// 		else if (tokens[i]->type == OUTPUT_OP)
-	// 			printf("[OUTPUT_OP] %s [%d] [fd == %d]\n", tokens[i]->data, tokens[i]->quotes, tokens[i]->file.fd);
-	// 		else if (tokens[i]->type == ARG)
-	// 			printf("[ARG] %s [%d] [fd == %d]\n", tokens[i]->data, tokens[i]->quotes, tokens[i]->file.fd);
-	// 		else if (tokens[i]->type == APPEND_OP)
-	// 			printf("[APPEND_OP] %s [%d] [fd == %d]\n", tokens[i]->data, tokens[i]->quotes, tokens[i]->file.fd);
-	// 		else if (tokens[i]->type == HEREDOC_OP)
-	// 			printf("[HEREDOC_OP] %s [%d] [fd == %d]\n", tokens[i]->data, tokens[i]->quotes, tokens[i]->file.fd);
-	// 		tokens[i] = tokens[i]->next;
-	// 	}
-	// 	tokens[i] = head;
-	// 	i++;
-	// }
+	 i = 0;
+	while (tokens[i])
+	{
+		head = tokens[i];
+		while (tokens[i])
+		{
+			if (tokens[i]->type == INPUT_FILE)
+				printf("[INPUT_FILE] %s [%d] [fd == %d]\n", tokens[i]->data, tokens[i]->quotes, tokens[i]->file.fd);
+			else if (tokens[i]->type == OUTPUT_FILE)
+				printf("[OUTPUT_FILE] %s [%d] [fd == %d]\n", tokens[i]->data, tokens[i]->quotes, tokens[i]->file.fd);
+			else if (tokens[i]->type == HEREDOC)
+				printf("[HERDOC] %s [%d] [fd == %d]\n", tokens[i]->data, tokens[i]->quotes, tokens[i]->file.fd);
+			else if (tokens[i]->type == CMD)
+				printf("[CMD] %s [%d] [fd == %d]\n", tokens[i]->data, tokens[i]->quotes, tokens[i]->file.fd);
+			else if (tokens[i]->type == APPEND)
+				printf("[APPEND] %s [%d] [fd == %d]\n", tokens[i]->data, tokens[i]->quotes, tokens[i]->file.fd);
+			else if (tokens[i]->type == INPUT_OP)
+				printf("[INPUT_OP] %s [%d] [fd == %d]\n", tokens[i]->data, tokens[i]->quotes, tokens[i]->file.fd);
+			else if (tokens[i]->type == OUTPUT_OP)
+				printf("[OUTPUT_OP] %s [%d] [fd == %d]\n", tokens[i]->data, tokens[i]->quotes, tokens[i]->file.fd);
+			else if (tokens[i]->type == ARG)
+				printf("[ARG] %s [%d] [fd == %d]\n", tokens[i]->data, tokens[i]->quotes, tokens[i]->file.fd);
+			else if (tokens[i]->type == APPEND_OP)
+				printf("[APPEND_OP] %s [%d] [fd == %d]\n", tokens[i]->data, tokens[i]->quotes, tokens[i]->file.fd);
+			else if (tokens[i]->type == HEREDOC_OP)
+				printf("[HEREDOC_OP] %s [%d] [fd == %d]\n", tokens[i]->data, tokens[i]->quotes, tokens[i]->file.fd);
+			tokens[i] = tokens[i]->next;
+		}
+		tokens[i] = head;
+		i++;
+	}
 	return (tokens);
 }
 
@@ -224,30 +224,4 @@ int	main(int ac, char **av, char **env)
 			continue ;
 		execution(&t_mini);
 	}
-	//free (ptr);
 }
-
-//int main(int ac, char **av, char **env)
-//{   
-//    t_token     ptr;
-//    t_shell t_mini;
-//    t_mini.in = dup(STDIN);
-//    t_mini.out = dup(STDOUT);
-//    t_mini.ret = 0;
-//    t_mini.no_exec = 0;
-//    t_mini.exit = 0;
-//    init_env(&t_mini,env);
-//    init_export_env(&t_mini ,env);
-//    (void)ac;
-//    (void)av;
-//    while (1)
-//    {
-//        init_sig();
-//        signals();
-//        ptr.parse_line = readline("minihell-$ ");
-//        if (!ptr.parse_line[0] || !ft_memcmp(ptr.parse_line, "\n"))
-//            continue ;
-//    
-//    }
-//    //free (ptr);
-//}
