@@ -6,7 +6,7 @@
 /*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 22:18:12 by amimouni          #+#    #+#             */
-/*   Updated: 2022/11/13 20:42:20 by amimouni         ###   ########.fr       */
+/*   Updated: 2022/11/14 00:26:34 by amimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void    redir_and_exec(t_shell *mini, t_minishell *token, int pipe)
     //     pipe = minipipe(mini);
         // else if (is_type(token, HEREDOC))
         //     herdoc_func(mini, HEREDOC);
-    if (mini->no_exec == 0 && pipe != 1)
+    if (mini->no_exec == 0)
         exec_cmd(mini, token);
 }
 
@@ -72,7 +72,7 @@ void execution(t_shell *ptr)
     int i;
 
     i = 0;
-
+    
     int pipe;
     pipe = 0;
     token = ptr->start;
@@ -86,18 +86,21 @@ void execution(t_shell *ptr)
         if (token[i + 1])
         {
             pipe = minipipe(ptr);
-            redir_and_exec(ptr, token[i + 1], pipe);
+            redir_and_exec(ptr, token[i], pipe);
         }
-        redir_and_exec(ptr, token[i], pipe);
-        reset_std(ptr);
-		close_fds(ptr);
-		reset_fds(ptr);
+        else
+        {
+            redir_and_exec(ptr, token[i], pipe);
+            reset_std(ptr);
+		    close_fds(ptr);
+		    reset_fds(ptr);
+            status = WEXITSTATUS(status);
+           //if (ptr->last == 0)
+           //   ptr->ret = status;
+           //if (ptr->parent == 0)
+           //   exit(ptr->ret);
+        }
         waitpid(-1, &status, 0);
-        status = WEXITSTATUS(status);
-        if (ptr->last == 0)
-           ptr->ret = status;
-        if (ptr->parent == 0)
-           exit(ptr->ret);
         ptr->no_exec = 0;
         i++;
     }
