@@ -6,7 +6,7 @@
 /*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 02:54:17 by amimouni          #+#    #+#             */
-/*   Updated: 2022/11/14 06:36:39 by amimouni         ###   ########.fr       */
+/*   Updated: 2022/11/14 06:41:32 by amimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void	heredoc_func(t_shell *head, t_minishell *token)
 	head->here_in = dup(STDIN_FILENO);
 	if (tmp_fd == -1)
 		return ;
-	signal(SIGINT, SIG_IGN);
 	pid = fork();
 	if (pid == 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 02:55:29 by amimouni          #+#    #+#             */
-/*   Updated: 2022/11/13 02:55:35 by amimouni         ###   ########.fr       */
+/*   Updated: 2022/11/14 06:59:37 by amimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,29 +15,10 @@
 
 void sig_handler(int sig)
 {
-    t_sig sig_m;
-    if (sig == SIGINT)
-    {
-        ft_putstr_fd("\b\b   ", 1);
-        ft_putstr_fd("\n", 1);
-        ft_putstr_fd("minihell-$ ", 1);
-        sig_m.exit_status = 1;
-    }
-    if (sig == SIGQUIT)
-    {
-        char *nbr;
-
-        nbr = ft_itoa(sig);
-        if (sig_m.pid != 0)
-        {
-            ft_putstr_fd("Quit :", 1);
-            ft_putstr_fd(nbr, 1);
-            sig_m.exit_status = 131;
-            sig_m.sigquit = 1;
-        }
-        free(nbr);
-        nbr = NULL;
-    } 
+    sig++;
+	write(1, "\n", 1);
+	rl_on_new_line();
+	rl_redisplay();
 }
 
 void init_sig(void)
