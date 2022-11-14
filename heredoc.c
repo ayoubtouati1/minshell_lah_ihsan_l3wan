@@ -6,7 +6,7 @@
 /*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 02:54:17 by amimouni          #+#    #+#             */
-/*   Updated: 2022/11/14 06:41:32 by amimouni         ###   ########.fr       */
+/*   Updated: 2022/11/14 22:05:37 by amimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 static
 int	create_temporary_file(void)
 {
-	return (open(".tmp_hdocu", O_WRONLY | O_CREAT | O_TRUNC, 0600));
+	return (open("../.tmp_hdocu", O_WRONLY | O_CREAT | O_TRUNC, 0600));
 }
 
 void	restores_stdin_and_closes(void)
 {
 	int		tmp_fd;
 
-	tmp_fd = open(".tmp_hdocu", O_RDONLY);
+	tmp_fd = open("../.tmp_hdocu", O_RDONLY);
 	unlink(".tmp_hdocu");
 	dup2(tmp_fd, STDIN_FILENO);
 	close(tmp_fd);

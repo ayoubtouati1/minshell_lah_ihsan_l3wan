@@ -6,7 +6,7 @@
 #    By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/13 19:13:44 by atouati           #+#    #+#              #
-#    Updated: 2022/11/14 06:52:45 by amimouni         ###   ########.fr        #
+#    Updated: 2022/11/14 22:10:55 by amimouni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ NAME = minishell
 all: ${NAME}
 
 ${NAME}: ${SRCS}
-	${CC} ${SRCS} ${SRCS2} ${BUILTINS} -lreadline -L .brew/opt/readline/lib -I .brew/opt/readline/include -o ${NAME}
+	${CC} ${SRCS} ${SRCS2} ${BUILTINS} -lreadline -L /Users/amimouni/homebrew/opt/readline/lib -I /Users/amimouni/homebrew/opt/readline/include -o ${NAME}
 
 clean:
 
@@ -44,3 +44,8 @@ fclean: clean
 	${RM} ${NAME}
 
 re: fclean all
+
+push:
+	@git add .
+	@git commit -m "messi"
+	@git push

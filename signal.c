@@ -6,7 +6,7 @@
 /*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 02:55:29 by amimouni          #+#    #+#             */
-/*   Updated: 2022/11/14 06:59:37 by amimouni         ###   ########.fr       */
+/*   Updated: 2022/11/14 21:34:50 by amimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void sig_handler(int sig)
 {
     sig++;
 	write(1, "\n", 1);
+    rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();
 }

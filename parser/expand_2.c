@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atouati <atouati@student.42.fr>            +#+  +:+       +#+        */
+/*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 02:27:46 by atouati           #+#    #+#             */
-/*   Updated: 2022/11/14 00:17:06 by atouati          ###   ########.fr       */
+/*   Updated: 2022/11/14 21:51:37 by amimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char *dollar_expand(char *str, char *tmp, t_token *ptr, char **env)
 				ptr->i++;
 				tmp = ft_strrjoin(tmp, expand(str, ptr->i, env));
 			}
-			while (str[ptr->i] && (str[ptr->i] != '"' && str[ptr->i] != '\'' && str[ptr->i] != '$' && str[ptr->i] != '.' && str[ptr->i] != ' '))
+			while (str[ptr->i] && (str[ptr->i] != '"' && str[ptr->i] != '\'' && str[ptr->i] != '$' && str[ptr->i] != '.' && str[ptr->i] != ',' && str[ptr->i] != ' '))
 				ptr->i++;
 		}
 	}
@@ -72,7 +72,7 @@ char	*expand(char *str, int i, char **env)
 	char	*dest;
 
 	j = i;
-	while (str[j] && (str[j] != '"' && str[j] != '\'' && str[j] != '$' && str[j] != '.' && str[j] != ' '))
+	while (str[j] && (str[j] != '"' && str[j] != '\'' && str[j] != '$' && str[j] != '.' && str[j] != ',' && str[j] != ' '))
 		j++;
 	if (ft_isdigit(str[i]))
 		j = i + 1;
