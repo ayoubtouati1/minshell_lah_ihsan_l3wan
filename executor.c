@@ -6,7 +6,7 @@
 /*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 22:18:12 by amimouni          #+#    #+#             */
-/*   Updated: 2022/11/14 00:26:34 by amimouni         ###   ########.fr       */
+/*   Updated: 2022/11/14 06:36:22 by amimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,14 @@ void    redir_and_exec(t_shell *mini, t_minishell *token, int pipe)
             redir(mini, token, APPEND);
         else if(is_type(token, INPUT_FILE))
             input(mini, token);
+       else if (is_type(token, HEREDOC))
+            heredoc_func(mini, token);
         token = token->next;
     }
     token = head;
     // else if (mini->start[i])
     //     pipe = minipipe(mini);
-        // else if (is_type(token, HEREDOC))
-        //     herdoc_func(mini, HEREDOC);
+        
     if (mini->no_exec == 0)
         exec_cmd(mini, token);
 }
@@ -83,25 +84,17 @@ void execution(t_shell *ptr)
         ptr->charge = 1;
         ptr->parent = 1;
         ptr->last = 1;
-        if (token[i + 1])
-        {
-            pipe = minipipe(ptr);
-            redir_and_exec(ptr, token[i], pipe);
-        }
-        else
-        {
-            redir_and_exec(ptr, token[i], pipe);
-            reset_std(ptr);
-		    close_fds(ptr);
-		    reset_fds(ptr);
-            status = WEXITSTATUS(status);
-           //if (ptr->last == 0)
-           //   ptr->ret = status;
-           //if (ptr->parent == 0)
-           //   exit(ptr->ret);
-        }
+        redir_and_exec(ptr, token[i], pipe);
+        reset_std(ptr);
+		close_fds(ptr);
+		reset_fds(ptr);
         waitpid(-1, &status, 0);
-        ptr->no_exec = 0;
+        status = WEXITSTATUS(status);
+        if (ptr->last == 0)
+           ptr->ret = status;
+        if (ptr->parent == 0)
+           exit(ptr->ret);
+        ptr->no_exec = 0;    
         i++;
     }
 }

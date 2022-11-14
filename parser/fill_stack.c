@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_stack.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: atouati <atouati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 03:46:24 by atouati           #+#    #+#             */
-/*   Updated: 2022/11/13 20:31:56 by amimouni         ###   ########.fr       */
+/*   Updated: 2022/11/13 21:55:33 by atouati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,10 +116,13 @@ t_minishell	*fill_stack(t_minishell *stack_a, char **str, char **env)
 			//printf("------ %s\n", str[i]);
 			str[i] = handling_quotes(str[i], -1, ' ');
 			str[i] = check_expand(str[i], env, get_type(i, str));
-			tmp->data = ft_strdup(str[i]);
-			tmp->type = get_type(i, str);
-			tmp->next = NULL;
-			add_num(&stack_a, tmp);
+			if (str[i][0] != '\0')
+			{
+				tmp->data = ft_strdup(str[i]);
+				tmp->type = get_type(i, str);
+				tmp->next = NULL;
+				add_num(&stack_a, tmp);
+			}
 		}
 		//else
 		//	free(str[i]);

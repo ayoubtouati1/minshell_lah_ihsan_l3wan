@@ -11,6 +11,8 @@
 #include "parser/minishell.h"
 #include "dirent.h"
 #include <limits.h>
+#include "libft/libft.h"
+#include <errno.h>
 
 # define STDIN 0
 # define STDOUT 1
@@ -48,6 +50,7 @@ typedef struct s_shell
 	int				out;
 	int				fdin;
 	int				fdout;
+	int				here_in;
 	int				pipin;
 	int				pipout;
 	int				pid;
@@ -97,4 +100,6 @@ void		reset_std(t_shell *mini);
 void		close_fds(t_shell *mini);
 void		reset_fds(t_shell *mini);
 void		ft_close(int fd);
+char		*ms_getprompt();
+void		heredoc_func(t_shell *head, t_minishell *token);
 #endif  

@@ -6,7 +6,7 @@
 /*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 18:58:29 by amimouni          #+#    #+#             */
-/*   Updated: 2022/11/14 00:37:24 by amimouni         ###   ########.fr       */
+/*   Updated: 2022/11/14 02:50:27 by amimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,27 +55,22 @@ int minipipe(t_shell *mini)
     pipe(pipefd);
     pid = fork();
     if (pid == 0)
-    {
-        dup2(pipefd[1], STDOUT);
-        printf("=-=-=-=-=-=-\n");
-        close(pipefd[1]);
-        close(pipefd[0]);
-        mini->pipout = pipefd[1];
-        mini->pid = pid;
-        mini->last = 0;
-        return (1);
-    }
-    //else
-    //{
-    //    //ft_close(pipefd[0]);
-    //    dup2(pipefd[0], STDIN);
-    //    close(pipefd[1]);
-    //    close(pipefd[0]);
-    //    mini->pipin = pipefd[0];
-    //    mini->pid = -1;
-    //    mini->parent = 0;
-    //    mini->no_exec = 0;
-    //    return (2);
-    //}
-    return 1;
+	{
+		ft_close(pipefd[1]);
+		dup2(pipefd[0], STDIN);
+		mini->pipin = pipefd[0];
+		mini->pid = -1;
+		mini->parent = 0;
+		mini->no_exec = 0;
+		return (2);
+	}
+    else
+	{
+		ft_close(pipefd[0]);
+		dup2(pipefd[1], STDOUT);
+		mini->pipout = pipefd[1];
+		mini->pid = pid;
+		mini->last = 0;
+		return (1);
+	}
 }

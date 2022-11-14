@@ -6,7 +6,7 @@
 /*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:36:29 by amimouni          #+#    #+#             */
-/*   Updated: 2022/11/13 19:10:35 by amimouni         ###   ########.fr       */
+/*   Updated: 2022/11/14 03:20:42 by amimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	close_fds(t_shell *mini)
 
 void	reset_fds(t_shell *mini)
 {
+	mini->here_in = 1;
 	mini->fdin = -1;
 	mini->fdout = -1;
 	mini->pipin = -1;
