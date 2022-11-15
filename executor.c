@@ -6,7 +6,7 @@
 /*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 22:18:12 by amimouni          #+#    #+#             */
-/*   Updated: 2022/11/14 06:36:22 by amimouni         ###   ########.fr       */
+/*   Updated: 2022/11/15 21:25:28 by amimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ void    redir_and_exec(t_shell *mini, t_minishell *token, int pipe)
 {
     t_minishell *prev;
     t_minishell *head;
-   // prev = prev_sep(token, 0);
-    // next = next_sep(token, 0);
     head = token;
     while (token)
     {
@@ -54,15 +52,15 @@ void    redir_and_exec(t_shell *mini, t_minishell *token, int pipe)
             redir(mini, token, APPEND);
         else if(is_type(token, INPUT_FILE))
             input(mini, token);
-       else if (is_type(token, HEREDOC))
+        else if (is_type(token, HEREDOC))
             heredoc_func(mini, token);
+        // else if(token->next == NULL)
+        //     pipe = minipipe(mini);
         token = token->next;
     }
+    
     token = head;
-    // else if (mini->start[i])
-    //     pipe = minipipe(mini);
-        
-    if (mini->no_exec == 0)
+    if (mini->no_exec == 0 && pipe != 1)
         exec_cmd(mini, token);
 }
 
@@ -71,19 +69,20 @@ void execution(t_shell *ptr)
     t_minishell **token;
     int status;
     int i;
-
-    i = 0;
-    
     int pipe;
+    
+    i = 0;
     pipe = 0;
     token = ptr->start;
-    // if (is_types(ptr->start, "TAI"))
-    //     token = ptr->start->next;
     while (token[i] && ptr->exit == 0)
     {
         ptr->charge = 1;
         ptr->parent = 1;
         ptr->last = 1;
+        if (token[i + 1])
+        {
+            pipe = minipipe(ptr);
+        }
         redir_and_exec(ptr, token[i], pipe);
         reset_std(ptr);
 		close_fds(ptr);

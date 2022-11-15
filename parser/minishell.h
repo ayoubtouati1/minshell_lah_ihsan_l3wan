@@ -6,7 +6,7 @@
 /*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 16:30:51 by atouati           #+#    #+#             */
-/*   Updated: 2022/11/14 21:38:22 by amimouni         ###   ########.fr       */
+/*   Updated: 2022/11/15 04:35:25 by amimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ enum e_type
 	INPUT_OP,
 	OUTPUT_OP,
 	APPEND_OP,
+	PIPE,
 	D_QUOTES,
 	S_QUOTES,
 	NO_QUOTES

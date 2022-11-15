@@ -6,7 +6,7 @@
 /*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 04:30:44 by amimouni          #+#    #+#             */
-/*   Updated: 2022/11/13 02:54:06 by amimouni         ###   ########.fr       */
+/*   Updated: 2022/11/15 02:30:41 by amimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	error_print(char *path)
 
 	fd = open(path, O_WRONLY);
 	folder = opendir(path);
-	ft_putstr_fd("minishell :" ,2);
+	ft_putstr_fd("minishell: " ,2);
 	ft_putstr_fd(path, 2);
 	if (ft_strchr(path, '/') == NULL)
 		ft_putstr_fd(": command not found\n", STDERR);

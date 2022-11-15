@@ -6,7 +6,7 @@
 /*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 18:58:29 by amimouni          #+#    #+#             */
-/*   Updated: 2022/11/14 02:50:27 by amimouni         ###   ########.fr       */
+/*   Updated: 2022/11/15 21:12:36 by amimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int minipipe(t_shell *mini)
 {
     pid_t pid;
     int pipefd[2];
+    
     pipe(pipefd);
     pid = fork();
     if (pid == 0)
