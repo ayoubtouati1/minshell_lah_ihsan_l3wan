@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: atouati <atouati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 22:18:12 by amimouni          #+#    #+#             */
-/*   Updated: 2022/11/15 21:25:28 by amimouni         ###   ########.fr       */
+/*   Updated: 2022/11/18 02:29:19 by atouati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int is_types(t_minishell *token, char *types)
     return (0);    
 }
 
-void    redir_and_exec(t_shell *mini, t_minishell *token, int pipe)
+void    redir_and_exec(t_shell *mini, t_minishell *token)
 {
     t_minishell *prev;
     t_minishell *head;
@@ -60,7 +60,7 @@ void    redir_and_exec(t_shell *mini, t_minishell *token, int pipe)
     }
     
     token = head;
-    if (mini->no_exec == 0 && pipe != 1)
+    if (mini->no_exec == 0)
         exec_cmd(mini, token);
 }
 
@@ -80,13 +80,14 @@ void execution(t_shell *ptr)
         ptr->parent = 1;
         ptr->last = 1;
         if (token[i + 1])
+            pipe = minipipe(ptr, token[i]);
+        else
         {
-            pipe = minipipe(ptr);
+            redir_and_exec(ptr, token[i]);
+            reset_std(ptr);
+		    close_fds(ptr);
+		    reset_fds(ptr);
         }
-        redir_and_exec(ptr, token[i], pipe);
-        reset_std(ptr);
-		close_fds(ptr);
-		reset_fds(ptr);
         waitpid(-1, &status, 0);
         status = WEXITSTATUS(status);
         if (ptr->last == 0)

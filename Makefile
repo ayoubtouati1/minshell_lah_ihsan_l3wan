@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+         #
+#    By: atouati <atouati@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/13 19:13:44 by atouati           #+#    #+#              #
-#    Updated: 2022/11/14 22:10:55 by amimouni         ###   ########.fr        #
+#    Updated: 2022/11/18 01:10:45 by atouati          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ NAME = minishell
 all: ${NAME}
 
 ${NAME}: ${SRCS}
-	${CC} ${SRCS} ${SRCS2} ${BUILTINS} -lreadline -L /Users/amimouni/homebrew/opt/readline/lib -I /Users/amimouni/homebrew/opt/readline/include -o ${NAME}
+	${CC} ${SRCS} ${SRCS2} ${BUILTINS} -lreadline -L /Users/atouati/homebrew/opt/readline/lib -I /Users/atouati/homebrew/opt/readline/include -o ${NAME}
 
 clean:
 

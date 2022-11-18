@@ -91,7 +91,7 @@ int			run_bin(char **av, t_list_env *env, t_shell *mini);
 char		*env_to_str(t_list_env *lst);
 void		redir(t_shell *mini, t_minishell *token, int type);
 void		input(t_shell *mini, t_minishell *token);
-int			minipipe(t_shell *mini);
+int 		minipipe(t_shell *mini, t_minishell *token);
 void		input(t_shell *mini, t_minishell *token);
 int			is_in_env(t_list_env *env, char *args);
 int			env_add(const char *value, t_list_env *env);
@@ -102,4 +102,5 @@ void		reset_fds(t_shell *mini);
 void		ft_close(int fd);
 char		*ms_getprompt();
 void		heredoc_func(t_shell *head, t_minishell *token);
+void   		redir_and_exec(t_shell *mini, t_minishell *token);
 #endif  
