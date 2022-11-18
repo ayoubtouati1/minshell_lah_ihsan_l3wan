@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   handling_quotes.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atouati <atouati@student.42.fr>            +#+  +:+       +#+        */
+/*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 18:25:03 by atouati           #+#    #+#             */
-/*   Updated: 2022/11/09 16:13:27 by atouati          ###   ########.fr       */
+/*   Updated: 2022/11/18 08:39:20 by amimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell2.h"
 
 int	replace_sep(char **dst, char *str, int i, t_token *ptr)
 {

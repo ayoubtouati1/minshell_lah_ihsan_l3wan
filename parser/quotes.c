@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atouati <atouati@student.42.fr>            +#+  +:+       +#+        */
+/*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 03:48:25 by atouati           #+#    #+#             */
-/*   Updated: 2022/11/09 17:39:21 by atouati          ###   ########.fr       */
+/*   Updated: 2022/11/18 08:39:34 by amimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell2.h"
 
 char	**replace_in_quotes(char **str, char a, char b)
 {

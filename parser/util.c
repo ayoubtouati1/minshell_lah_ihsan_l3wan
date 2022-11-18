@@ -6,11 +6,11 @@
 /*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 02:55:18 by atouati           #+#    #+#             */
-/*   Updated: 2022/11/13 20:33:14 by amimouni         ###   ########.fr       */
+/*   Updated: 2022/11/18 08:40:00 by amimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"minishell.h"
+#include"../minishell2.h"
 
 void	ft_free(char **dst)
 {

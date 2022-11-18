@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atouati <atouati@student.42.fr>            +#+  +:+       +#+        */
+/*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 22:18:12 by amimouni          #+#    #+#             */
-/*   Updated: 2022/11/18 02:29:19 by atouati          ###   ########.fr       */
+/*   Updated: 2022/11/18 07:51:23 by amimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,6 @@ void    redir_and_exec(t_shell *mini, t_minishell *token)
             input(mini, token);
         else if (is_type(token, HEREDOC))
             heredoc_func(mini, token);
-        // else if(token->next == NULL)
-        //     pipe = minipipe(mini);
         token = token->next;
     }
     

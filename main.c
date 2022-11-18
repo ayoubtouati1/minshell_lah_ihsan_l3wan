@@ -6,13 +6,14 @@
 /*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 16:11:31 by atouati           #+#    #+#             */
-/*   Updated: 2022/11/14 06:49:40 by amimouni         ###   ########.fr       */
+/*   Updated: 2022/11/18 19:42:55 by amimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell2.h"
 #include "libft/libft.h"
 
+t_sig	g_sig;
 int	init_env(t_shell *mini, char **env_array)
 {
 	t_list_env	*env;
@@ -65,13 +66,13 @@ int	init_export_env(t_shell *mini, char **env_array)
 	return (0);
 }
 
-t_minishell	**fill_token(t_token *ptr, char **env)
+t_minishell	**fill_token(t_token *ptr, char **env, t_shell *mini)
 {
 	t_minishell	*head;
 	t_minishell	**tokens;
 	int			i;
 
-	tokens = sep_split(ptr->pip_split, ' ', env);
+	tokens = sep_split(ptr->pip_split, ' ', env, mini);
 	i = 0;
 	while (tokens[i] != NULL)
 	{
@@ -122,10 +123,10 @@ int	check_error_op(char *parse_line)
 void	signals(void)
 {
 	signal(SIGINT, &sig_handler);
-	signal(SIGQUIT, SIG_IGN);
+	signal(SIGQUIT, &sig_handler_quit);
 }
 
-t_minishell	**parser(t_token *ptr, char **env)
+t_minishell	**parser(t_token *ptr, char **env, t_shell *mini)
 {
 	t_minishell	**tokens;
 	int			i;
@@ -143,12 +144,14 @@ t_minishell	**parser(t_token *ptr, char **env)
 	if (ptr->parse_line[i] == '|')
 	{
 		printf("minishell: syntax error near unexpected token `|'\n");
+		mini->ret = 258;
 		ptr->if_true = 1;
 		return (0);
 	}
 	if (!check_error_op(ptr->parse_line))
 	{
 		printf("......minishell: syntax error near unexpected token `|'\n");
+		mini->ret = 258;
 		ptr->if_true = 1;
 		return (0);
 	}
@@ -156,7 +159,7 @@ t_minishell	**parser(t_token *ptr, char **env)
 	free(ptr->parse_line);
 	ptr->pip_split = replace_in_quotes(ptr->pip_split, -1, '|');
 	ptr->pip_split = replace_in_quotes(ptr->pip_split, ' ', -1);
-	tokens = fill_token(ptr, env);
+	tokens = fill_token(ptr, env, mini);
 	return (tokens);
 }
 
@@ -169,7 +172,7 @@ int	main(int ac, char **av, char **env)
 	t_mini.out = dup(STDOUT);
     t_mini.ret = 0;
     t_mini.no_exec = 0;
-    t_mini.exit = 0;
+   
 	reset_fds(&t_mini);
     init_env(&t_mini,env);
     init_export_env(&t_mini ,env);
@@ -177,6 +180,7 @@ int	main(int ac, char **av, char **env)
     (void)av;
 	while (1)
 	{
+		t_mini.exit = 0;
 		prt = ms_getprompt();
 		ptr.if_true = 0;
 		init_sig();
@@ -190,9 +194,10 @@ int	main(int ac, char **av, char **env)
 			continue ;
 		}
 		add_history(ptr.parse_line);
-		t_mini.start = parser(&ptr, env);
+		t_mini.start = parser(&ptr, env, &t_mini);
 		if (ptr.if_true == 1)
 			continue ;
 		execution(&t_mini);
+		system("leaks minishell");
 	}
 }

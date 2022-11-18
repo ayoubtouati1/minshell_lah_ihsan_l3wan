@@ -6,11 +6,11 @@
 /*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 02:27:46 by atouati           #+#    #+#             */
-/*   Updated: 2022/11/14 21:51:37 by amimouni         ###   ########.fr       */
+/*   Updated: 2022/11/18 08:38:08 by amimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"minishell.h"
+#include"../minishell2.h"
 
 char *dollar_expand(char *str, char *tmp, t_token *ptr, char **env)
 {

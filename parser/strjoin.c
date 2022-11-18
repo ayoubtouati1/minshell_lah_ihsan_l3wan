@@ -6,11 +6,11 @@
 /*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 22:01:38 by atouati           #+#    #+#             */
-/*   Updated: 2022/11/13 21:21:32 by amimouni         ###   ########.fr       */
+/*   Updated: 2022/11/18 08:39:51 by amimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"minishell.h"
+#include"../minishell2.h"
 
 static char	*ft_sstrcpy(char *str, char *s1, char *s2)
 {

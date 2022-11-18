@@ -6,11 +6,11 @@
 /*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 01:40:30 by atouati           #+#    #+#             */
-/*   Updated: 2022/11/13 21:22:49 by amimouni         ###   ########.fr       */
+/*   Updated: 2022/11/18 08:38:18 by amimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell2.h"
 
 void	check_quotes(t_token *ptr, char *str)
 {

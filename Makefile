@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: atouati <atouati@student.42.fr>            +#+  +:+       +#+         #
+#    By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/13 19:13:44 by atouati           #+#    #+#              #
-#    Updated: 2022/11/18 01:10:45 by atouati          ###   ########.fr        #
+#    Updated: 2022/11/18 19:35:04 by amimouni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRCS2 = libft/ft_memmove.c libft/ft_isalpha.c libft/ft_isalnum.c libft/ft_isasci
 BUILTINS = builtins/cd.c builtins/echo.c builtins/env.c builtins/exit.c builtins/export.c builtins/pwd.c \
 		   builtins/unset.c env_func/ft_list_sort_env.c
 
-		   	
+# SANITIZE = -fsanitize=address -g
 CC	= cc
 RM	= rm -f
 NAME = minishell
@@ -36,7 +36,7 @@ NAME = minishell
 all: ${NAME}
 
 ${NAME}: ${SRCS}
-	${CC} ${SRCS} ${SRCS2} ${BUILTINS} -lreadline -L /Users/atouati/homebrew/opt/readline/lib -I /Users/atouati/homebrew/opt/readline/include -o ${NAME}
+	${CC} ${SRCS} ${SRCS2} ${BUILTINS} -lreadline -L /Users/amimouni/homebrew/opt/readline/lib -I /Users/amimouni/homebrew/opt/readline/include -o ${NAME}
 
 clean:
 

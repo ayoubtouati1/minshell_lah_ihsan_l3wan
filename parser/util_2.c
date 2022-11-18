@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   util_2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atouati <atouati@student.42.fr>            +#+  +:+       +#+        */
+/*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 03:38:53 by atouati           #+#    #+#             */
-/*   Updated: 2022/11/03 03:41:37 by atouati          ###   ########.fr       */
+/*   Updated: 2022/11/18 08:39:56 by amimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell2.h"
 
 void	add_befor_opirations(char **str, char **dest, int *i, int *j)
 {

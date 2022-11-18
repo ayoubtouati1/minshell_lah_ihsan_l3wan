@@ -6,7 +6,7 @@
 /*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 01:50:54 by amimouni          #+#    #+#             */
-/*   Updated: 2022/11/13 20:44:21 by amimouni         ###   ########.fr       */
+/*   Updated: 2022/11/18 19:39:50 by amimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void    exec_cmd(t_shell *mini, t_minishell *token)
         mini->ret = run_builtins(cmd, mini);
     else if (cmd[0])
         mini->ret = run_bin(cmd, mini->env, mini);
-    // free_tab(cmd);
+    free_tab(cmd);
     ft_close(mini->pipout);
     ft_close(mini->pipin);
     mini->pipin = -1;

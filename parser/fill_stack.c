@@ -6,11 +6,12 @@
 /*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 03:46:24 by atouati           #+#    #+#             */
-/*   Updated: 2022/11/15 04:43:52 by amimouni         ###   ########.fr       */
+/*   Updated: 2022/11/18 08:43:53 by amimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell2.h"
+
 
 void	add_num(t_minishell **top, t_minishell *tmp)
 {
@@ -91,7 +92,7 @@ int	check_error_2(char *str)
 	
 }
 
-t_minishell	*fill_stack(t_minishell *stack_a, char **str, char **env)
+t_minishell	*fill_stack(t_minishell *stack_a, char **str, char **env, t_shell *mini)
 {
 	t_minishell	*tmp;
 	int			i;
@@ -101,6 +102,7 @@ t_minishell	*fill_stack(t_minishell *stack_a, char **str, char **env)
 	if (!check_error(str))
 	{
 		printf("minishell: syntax error near unexpected token\n");
+		mini->ret = 258;
 		return (NULL);
 	}
 	while (str[i])
@@ -108,6 +110,7 @@ t_minishell	*fill_stack(t_minishell *stack_a, char **str, char **env)
 		if (check_error_2(str[i]))
 		{
 			printf("minishell: syntax error near unexpected token\n");
+			mini->ret = 258;
 			return (NULL);
 		}
 		if (str[i][0] != '<' && str[i][0] != '>' && str[i][0] != '|')
@@ -194,7 +197,7 @@ void	define_cmd(t_minishell **tokens)
 	}
 }
 
-t_minishell	**sep_split(char **str, char sep, char **env)
+t_minishell	**sep_split(char **str, char sep, char **env, t_shell *mini)
 {
 	t_minishell	**tokens;
 	t_minishell	*head;
@@ -210,7 +213,7 @@ t_minishell	**sep_split(char **str, char sep, char **env)
 	{
 		chr = ft_split(str[i], sep);
 		tokens[i] = NULL;
-		tokens[i] = fill_stack(tokens[i], chr, env);
+		tokens[i] = fill_stack(tokens[i], chr, env, mini);
 		i++;
 		ft_free(chr);
 	}

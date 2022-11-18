@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_func.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atouati <atouati@student.42.fr>            +#+  +:+       +#+        */
+/*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 04:01:09 by atouati           #+#    #+#             */
-/*   Updated: 2022/11/03 04:01:44 by atouati          ###   ########.fr       */
+/*   Updated: 2022/11/18 08:37:52 by amimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell2.h"
 
 
 int	check_dollar(char *str, int i)
