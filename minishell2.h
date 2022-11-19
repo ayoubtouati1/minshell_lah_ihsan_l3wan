@@ -118,6 +118,7 @@ typedef struct s_shell
 	int				ret;
 	int				exit;
 	int				no_exec;
+	int				n;
 }t_shell;
 //////////// or Execution //////////////
 void		replace_env(t_list_env **list, char *name, char *value);
@@ -160,8 +161,8 @@ void		close_fds(t_shell *mini);
 void		reset_fds(t_shell *mini);
 void		ft_close(int fd);
 char		*ms_getprompt();
-void		heredoc_func(t_shell *head, t_minishell *token);
-void   		redir_and_exec(t_shell *mini, t_minishell *token);
+void		heredoc_func(t_shell *head, t_minishell *token, t_shell *ptr);
+void  		redir_and_exec(t_shell *mini, t_minishell *token);
 void		signals(void);
 
 ////////////for the parsing//////////////

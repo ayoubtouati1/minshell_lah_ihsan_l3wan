@@ -6,7 +6,7 @@
 /*   By: atouati <atouati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 22:18:12 by amimouni          #+#    #+#             */
-/*   Updated: 2022/11/19 14:51:37 by atouati          ###   ########.fr       */
+/*   Updated: 2022/11/20 00:57:20 by atouati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,26 @@ static int is_types(t_minishell *token, char *types)
     return (0);    
 }
 
+void    count_heredoc(t_shell *ptr, t_minishell **token)
+{
+    int i;
+    t_minishell *head;
+
+    i = 0;
+    while (token[i])
+    {
+        head = token[i];
+        while (token[i])
+        {     
+            if (is_type(token[i], HEREDOC))
+                ptr->n++;
+            token[i] = token[i]->next;
+        }
+        token[i] = head;
+        i++;
+    }
+}
+
 void    redir_and_exec(t_shell *mini, t_minishell *token)
 {
     t_minishell *prev;
@@ -52,8 +72,6 @@ void    redir_and_exec(t_shell *mini, t_minishell *token)
             redir(mini, token, APPEND);
         else if(is_type(token, INPUT_FILE))
             input(mini, token);
-        else if (is_type(token, HEREDOC))
-            heredoc_func(mini, token);
         token = token->next;
     }
     
@@ -65,6 +83,7 @@ void    redir_and_exec(t_shell *mini, t_minishell *token)
 void execution(t_shell *ptr)
 {
     t_minishell **token;
+    t_minishell *head;
     int status;
     int i;
     int pipe;
@@ -72,8 +91,27 @@ void execution(t_shell *ptr)
     i = 0;
     pipe = 0;
     token = ptr->start;
+    ptr->n = 0;
+    count_heredoc(ptr, token);
+    while (token[i])
+    {
+        head = token[i];
+        while (token[i])
+        {     
+            if (is_type(token[i], HEREDOC))
+            {
+                ptr->n--;
+                heredoc_func(ptr, token[i], ptr);
+            }
+            token[i] = token[i]->next;
+        }
+        token[i] = head;
+        i++;
+    }
+    i = 0;
     while (token[i] && ptr->exit == 0)
     {
+        
         ptr->charge = 1;
         ptr->parent = 1;
         ptr->last = 1;

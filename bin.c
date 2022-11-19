@@ -6,7 +6,7 @@
 /*   By: atouati <atouati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 04:30:44 by amimouni          #+#    #+#             */
-/*   Updated: 2022/11/19 14:48:45 by atouati          ###   ########.fr       */
+/*   Updated: 2022/11/19 15:18:11 by atouati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int execute_cmd(char *path, char **av, t_list_env *env, t_shell *mini)
 		signals();
 	}
 	// if (ret == 32256 || ret == 32512)
-	// 	ret = ret / 253;
+	// 	ret = ret / 256;
 	return(ret);	
 }
 
@@ -82,7 +82,7 @@ char	*join_path(char *s1, char *s2)
 	tmp = ft_strjoin(s1, "/");
 	path = ft_strjoin(tmp, s2);
 	free(tmp);
-	return (path); 
+	return (path);
 }
 
 char	*check_dir(char *bin, char *command)

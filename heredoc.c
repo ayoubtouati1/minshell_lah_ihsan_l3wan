@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: atouati <atouati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 02:54:17 by amimouni          #+#    #+#             */
-/*   Updated: 2022/11/14 22:05:37 by amimouni         ###   ########.fr       */
+/*   Updated: 2022/11/20 00:53:37 by atouati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,14 @@ int	create_temporary_file(void)
 	return (open("../.tmp_hdocu", O_WRONLY | O_CREAT | O_TRUNC, 0600));
 }
 
-void	restores_stdin_and_closes(void)
+void	restores_stdin_and_closes(t_minishell *token, t_shell *ptr)
 {
 	int		tmp_fd;
 
 	tmp_fd = open("../.tmp_hdocu", O_RDONLY);
 	unlink(".tmp_hdocu");
+	if (ptr->n != 0)
+		return ;
 	dup2(tmp_fd, STDIN_FILENO);
 	close(tmp_fd);
 }
@@ -58,7 +60,7 @@ static void	get_and_write_input(t_shell *head, t_minishell *token, int tmp_fd)
 	exit(0);
 }
 
-void	heredoc_func(t_shell *head, t_minishell *token)
+void	heredoc_func(t_shell *head, t_minishell *token, t_shell *ptr)
 {
 	int		tmp_fd;
 	int		pid;
@@ -75,6 +77,6 @@ void	heredoc_func(t_shell *head, t_minishell *token)
 		close(tmp_fd);
 	}
 	waitpid(pid, &status, 0);
-	restores_stdin_and_closes();
+	restores_stdin_and_closes(token, ptr);
 	close(tmp_fd);
 }
