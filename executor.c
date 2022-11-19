@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: atouati <atouati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 22:18:12 by amimouni          #+#    #+#             */
-/*   Updated: 2022/11/18 07:51:23 by amimouni         ###   ########.fr       */
+/*   Updated: 2022/11/19 14:51:37 by atouati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,21 +78,26 @@ void execution(t_shell *ptr)
         ptr->parent = 1;
         ptr->last = 1;
         if (token[i + 1])
-            pipe = minipipe(ptr, token[i]);
+            minipipe(ptr, token[i]);
         else
         {
             redir_and_exec(ptr, token[i]);
             reset_std(ptr);
-		    close_fds(ptr);
+            close_fds(ptr);
 		    reset_fds(ptr);
-        }
-        waitpid(-1, &status, 0);
-        status = WEXITSTATUS(status);
-        if (ptr->last == 0)
-           ptr->ret = status;
-        if (ptr->parent == 0)
-           exit(ptr->ret);
-        ptr->no_exec = 0;    
+		}
+        //if (ptr->last == 0)
+        //   ptr->ret = status;
+        //if (ptr->parent == 0)
+        //   exit(ptr->ret);
+        //ptr->no_exec = 0;
         i++;
     }
+    while (i--)
+    {
+        waitpid(-1, &status, 0);
+        status = WEXITSTATUS(status);
+    }
+    ptr->ret = status;
+    
 }

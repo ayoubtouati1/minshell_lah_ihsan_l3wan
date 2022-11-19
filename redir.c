@@ -6,7 +6,7 @@
 /*   By: atouati <atouati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 18:58:29 by amimouni          #+#    #+#             */
-/*   Updated: 2022/11/18 03:15:14 by atouati          ###   ########.fr       */
+/*   Updated: 2022/11/19 14:28:32 by atouati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,11 @@ void    input(t_shell *mini, t_minishell *token)
     dup2(mini->fdin, STDIN);
 }
 
-int minipipe(t_shell *mini, t_minishell *token)
+void minipipe(t_shell *mini, t_minishell *token)
 {
     pid_t pid;
     int pipefd[2];
+    int status;
     
     pipe(pipefd);
     pid = fork();
@@ -67,7 +68,7 @@ int minipipe(t_shell *mini, t_minishell *token)
 		mini->parent = 0;
 		mini->no_exec = 0;
 		redir_and_exec(mini, token);
-        exit (0);
+        exit(0);
 	}
     else
 	{
@@ -77,7 +78,5 @@ int minipipe(t_shell *mini, t_minishell *token)
 		mini->pipin = pipefd[0];
 		mini->pid = pid;
 		mini->last = 0;
-		return (1);
 	}
-    return 0;
 }

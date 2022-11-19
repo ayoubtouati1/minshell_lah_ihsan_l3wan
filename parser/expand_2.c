@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: atouati <atouati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 02:27:46 by atouati           #+#    #+#             */
-/*   Updated: 2022/11/18 08:38:08 by amimouni         ###   ########.fr       */
+/*   Updated: 2022/11/18 23:33:43 by atouati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ char	*comper_to_env(char *dest, char **env)
 	free(dest);
 	return (NULL);
 }
-char	*check_expand(char *str, char **env, int type)
+char	*check_expand(char *str, char **env, int type, t_shell *mini)
 {
 	char	*dest;
 	char	*tmp;
@@ -123,10 +123,10 @@ char	*check_expand(char *str, char **env, int type)
 		if (type == HEREDOC)
 		{
 			ptr.s_quot = 1;
-			tmp = copy_no_expand(str,tmp, &ptr);
+			tmp = copy_no_expand(str,tmp, &ptr, mini);
 			continue ;
 		}
-		tmp = copy_no_expand(str,tmp, &ptr);
+		tmp = copy_no_expand(str,tmp, &ptr, mini);
 		tmp = digit_expand(str,tmp, &ptr, env);
 		tmp = dollar_expand(str,tmp, &ptr, env);
 		//sleep(2);

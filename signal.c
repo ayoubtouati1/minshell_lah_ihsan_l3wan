@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: atouati <atouati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 02:55:29 by amimouni          #+#    #+#             */
-/*   Updated: 2022/11/18 11:49:39 by amimouni         ###   ########.fr       */
+/*   Updated: 2022/11/19 14:35:50 by atouati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,11 @@ void sig_handler_quit(int code)
 	nbr = ft_itoa(code);
 	if (g_sig.pid != 0)
 	{
-		ft_putstr_fd("Quit: ", STDERR);
-		ft_putendl_fd(nbr, STDERR);
+		ft_putstr_fd("Quit: ", 1);
+		ft_putendl_fd(nbr, 1);
 		g_sig.exit_status = 131;
 		g_sig.sigquit = 1;
 	}
-	else
-		;
     ft_memdel(nbr);
 }
 void init_sig(void)

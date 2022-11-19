@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: atouati <atouati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 01:40:30 by atouati           #+#    #+#             */
-/*   Updated: 2022/11/18 08:38:18 by amimouni         ###   ########.fr       */
+/*   Updated: 2022/11/18 23:39:21 by atouati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,16 @@ void	count_for_alloc(char *str, t_token *ptr)
 	}
 }
 
-char	*copy_no_expand(char *str, char *tmp, t_token *ptr)
+char	*copy_no_expand(char *str, char *tmp, t_token *ptr, t_shell *mini)
 {
 	char	*dest;
 
-	if (ptr->s_quot == 1 || (((str[ptr->i] == '$' && str[ptr->i + 1] == '\0')
+	if (str[ptr->i] == '$' && str[ptr->i + 1] == '?')
+	{
+		ptr->i++;
+		tmp = ft_strrjoin(tmp, ft_itoa(mini->ret));
+	}
+	else if (ptr->s_quot == 1 || (((str[ptr->i] == '$' && str[ptr->i + 1] == '\0')
 				|| (str[ptr->i] == '$' && str[ptr->i + 1] == ' '))
 			|| (ptr->d_quot == 1 && str[ptr->i] == '$'
 				&& (str[ptr->i + 1] == '"' || str[ptr->i + 1] == '\''))))
@@ -89,7 +94,13 @@ char	*copy_no_expand(char *str, char *tmp, t_token *ptr)
 char	*digit_expand(char *str, char *tmp, t_token *ptr, char **env)
 {
 	ptr->i = ptr->n;
-	if (str[ptr->i] == '$' && ft_isdigit(str[ptr->i + 1]) == 1)
+	if (str[ptr->i] == '$' && str[ptr->i + 1] == '0')
+	{
+		tmp = ft_strrjoin(tmp, ft_strdup("Dba3"));
+		ptr->i = cont_dollar(str, ptr->n + 1);
+		tmp = ft_strrjoin(tmp, ft_substr(str, ptr->n + 2, ptr->i - ptr->n - 2));
+	}
+	else if (str[ptr->i] == '$' && ft_isdigit(str[ptr->i + 1]) == 1)
 	{
 		ptr->i++;
 		tmp = ft_strrjoin(tmp, expand(str, ptr->i, env));

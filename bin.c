@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bin.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: atouati <atouati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 04:30:44 by amimouni          #+#    #+#             */
-/*   Updated: 2022/11/15 02:30:41 by amimouni         ###   ########.fr       */
+/*   Updated: 2022/11/19 14:48:45 by atouati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,13 @@ int execute_cmd(char *path, char **av, t_list_env *env, t_shell *mini)
 	char *ptr;
 	char **env_arr;
 	ret = 0;
+	//signal(SIGINT, SIG_IGN);
+	//signal(SIGQUIT, SIG_IGN);
 	sig.pid = fork();
 	if (sig.pid == 0)
 	{
+		signal(SIGINT, 	SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
 		ptr = env_to_str(env);
 		env_arr = ft_split(ptr, '\n');
 		free(ptr);
@@ -56,11 +60,17 @@ int execute_cmd(char *path, char **av, t_list_env *env, t_shell *mini)
 			execve(path, av, env_arr);
 		ret = error_print(path);
 		free_tab(env_arr);
+		//printf("ret is ===> %d\n", ret);
 		// free_token(mini->start);
-		exit(ret);	
+		exit(ret);
 	}
 	else
+	{
 		waitpid(sig.pid, &ret, 0);
+		signals();
+	}
+	// if (ret == 32256 || ret == 32512)
+	// 	ret = ret / 253;
 	return(ret);	
 }
 

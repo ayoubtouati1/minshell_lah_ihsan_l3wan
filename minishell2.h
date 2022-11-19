@@ -150,7 +150,7 @@ int			run_bin(char **av, t_list_env *env, t_shell *mini);
 char		*env_to_str(t_list_env *lst);
 void		redir(t_shell *mini, t_minishell *token, int type);
 void		input(t_shell *mini, t_minishell *token);
-int 		minipipe(t_shell *mini, t_minishell *token);
+void 		minipipe(t_shell *mini, t_minishell *token);
 void		input(t_shell *mini, t_minishell *token);
 int			is_in_env(t_list_env *env, char *args);
 int			env_add(const char *value, t_list_env *env);
@@ -162,6 +162,7 @@ void		ft_close(int fd);
 char		*ms_getprompt();
 void		heredoc_func(t_shell *head, t_minishell *token);
 void   		redir_and_exec(t_shell *mini, t_minishell *token);
+void		signals(void);
 
 ////////////for the parsing//////////////
 
@@ -180,7 +181,7 @@ char		*copy_no_dollar(char *str,char *tmp, t_token *ptr);
 int			quot_cont(char *str, int n, char sep);
 int			check_dollar(char *str, int i);
 int			cont_dollar(char *str, int i);
-char		*copy_no_expand(char *str, char *tmp, t_token *ptr);
+char		*copy_no_expand(char *str, char *tmp, t_token *ptr, t_shell *mini);
 char		*digit_expand(char *str, char *tmp, t_token *ptr, char **env);
 char		*dollar_expand(char *str, char *tmp, t_token *ptr, char ** env);
 char		*expand(char *str, int i, char **env);
@@ -196,7 +197,7 @@ char		*remove_quotes(char *str);
 int			check_quot(char *str);
 int			cont_quot(char *str);
 char		*comper_to_env(char *dest, char **env);
-char		*check_expand(char *str, char **env, int type);
+char		*check_expand(char *str, char **env, int type, t_shell *mini);
 char		**replace_in_quotes(char **str, char a, char b);
 void		define_cmd(t_minishell **tokens);
 t_minishell	**sep_split(char **str, char sep, char **env, t_shell *mini);

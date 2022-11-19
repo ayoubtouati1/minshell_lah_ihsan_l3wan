@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_stack.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: atouati <atouati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 03:46:24 by atouati           #+#    #+#             */
-/*   Updated: 2022/11/18 08:43:53 by amimouni         ###   ########.fr       */
+/*   Updated: 2022/11/18 23:27:34 by atouati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,20 +115,18 @@ t_minishell	*fill_stack(t_minishell *stack_a, char **str, char **env, t_shell *m
 		}
 		if (str[i][0] != '<' && str[i][0] != '>' && str[i][0] != '|')
 		{
-			tmp = malloc(sizeof(t_minishell));
 			//printf("------ %s\n", str[i]);
 			str[i] = handling_quotes(str[i], -1, ' ');
-			str[i] = check_expand(str[i], env, get_type(i, str));
+			str[i] = check_expand(str[i], env, get_type(i, str), mini);
 			if (str[i][0] != '\0')
 			{
+				tmp = malloc(sizeof(t_minishell));
 				tmp->data = ft_strdup(str[i]);
 				tmp->type = get_type(i, str);
 				tmp->next = NULL;
 				add_num(&stack_a, tmp);
 			}
 		}
-		//else
-		//	free(str[i]);
 		i++;
 	}
 	return (stack_a);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: atouati <atouati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 16:11:31 by atouati           #+#    #+#             */
-/*   Updated: 2022/11/18 19:42:55 by amimouni         ###   ########.fr       */
+/*   Updated: 2022/11/19 14:36:36 by atouati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,11 +181,11 @@ int	main(int ac, char **av, char **env)
 	while (1)
 	{
 		t_mini.exit = 0;
-		prt = ms_getprompt();
+		//prt = ms_getprompt();
 		ptr.if_true = 0;
 		init_sig();
        	signals();
-		ptr.parse_line = readline(prt);
+		ptr.parse_line = readline("$ ");
 		if (!ptr.parse_line)
 			exit (0);
 		if (!ft_memcmp(ptr.parse_line, "\n"))
@@ -198,6 +198,22 @@ int	main(int ac, char **av, char **env)
 		if (ptr.if_true == 1)
 			continue ;
 		execution(&t_mini);
-		system("leaks minishell");
+		//printf("=-=-=-=%d=-=-=-=\n", t_mini.ret);
+		t_minishell *head;
+		int i = 0;
+		while (t_mini.start[i])
+		{
+			while (t_mini.start[i])
+			{
+				free(t_mini.start[i]->data);
+				head = t_mini.start[i]->next;
+				free(t_mini.start[i]);
+				t_mini.start[i] = head;
+			}
+			i++;
+		}
+		free(t_mini.start);
+		//free(prt);
+		//system("leaks minishell");
 	}
 }

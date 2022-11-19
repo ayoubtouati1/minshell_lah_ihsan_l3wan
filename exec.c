@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amimouni <amimouni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: atouati <atouati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 01:50:54 by amimouni          #+#    #+#             */
-/*   Updated: 2022/11/18 19:39:50 by amimouni         ###   ########.fr       */
+/*   Updated: 2022/11/19 14:38:30 by atouati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ char    **cmd_tab(t_minishell *start)
 	while (token)
 	{
         if (token->type == CMD)
-            tabs[i++] = token->data;
+            tabs[i++] = ft_strdup(token->data);
         if (token->type == ARG)
-            tabs[i++] = token->data;
+            tabs[i++] = ft_strdup(token->data);
 		token = token->next;
 	}
 	tabs[i] = NULL;
